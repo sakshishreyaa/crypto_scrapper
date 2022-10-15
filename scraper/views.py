@@ -21,10 +21,8 @@ def get(request, *args, **kwargs):
 def post(request, *args, **kwargs):
     client = get_redis_client()
     data_list = json.loads(client.get('data'))
-    # print(data)
     old_data = CoinMarketCap.objects.all()
     for data in old_data:
-        print('old',data)
         data.latest=False 
         data.save()
     for data in data_list:
@@ -39,6 +37,5 @@ def post(request, *args, **kwargs):
             volume_24h=data["quote"]["USD"]["volume_24h"],
             circulating_supply=data["quote"]["USD"]["price"],
             )
-        print(obj.name,obj.price)
         obj.save()
     return JsonResponse({"response":"data successfuluyy updated in database"})
