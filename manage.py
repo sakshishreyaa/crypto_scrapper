@@ -5,7 +5,7 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crypto_scrapper.settings")
     try:
         from django.core.management import execute_from_command_line
-        # from scraper import schedule
+        from scraper import schedule
 
     except ImportError:
         # The above import may fail for some other reason. Ensure that the

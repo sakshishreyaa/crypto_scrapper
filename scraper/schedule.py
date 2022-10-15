@@ -2,7 +2,8 @@ import time,json
 from schedule import every, repeat, run_pending
 from .cache import get_redis_client
 from .scrape import fetch_data
-@repeat(every(1).seconds)
+
+@repeat(every(5).minutes)
 def job():
     client = get_redis_client()
     
@@ -15,6 +16,7 @@ def job():
         client.expire(key, 360000)
 
     print("data saved in cache")
+    
 
 while True:
     run_pending()

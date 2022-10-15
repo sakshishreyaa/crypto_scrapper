@@ -6,7 +6,7 @@ def fetch_data():
     }
     params = {
     'start':'1',
-    'limit':'50',
+    'limit':'100',
     'convert':'USD'
     }
     url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
