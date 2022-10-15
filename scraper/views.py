@@ -11,12 +11,12 @@ from .models import CoinMarketCap as CoinMarketCap
 
 
 def get(request, *args, **kwargs):
-    resp = CoinMarketCap.objects.filter(latest=True).all()
     data=[]
+    client= get_redis_client()
+    resp = json.loads(client.get("data"))
     for i in resp:
-        data.append({'name':i.name,'price':i.price,'1h_perc':i._1h_perc,'24h_perc':i._24h_perc,'7d_perc':i._7d_perc,'market_cap':i.market_cap,'volume_24h':i.volume_24h,'circulating_supply':i.circulating_supply})
+        data.append({'name':i["name"],'price':i["quote"]["USD"]["price"],'1h_perc':i["quote"]["USD"]["percent_change_1h"],'24h_perc':i["quote"]["USD"]["percent_change_24h"],'7d_perc':i["quote"]["USD"]["percent_change_7d"],'market_cap':i["quote"]["USD"]["market_cap"],'volume_24h':i["quote"]["USD"]["volume_24h"],'circulating_supply':i["circulating_supply"]})
     return render(request,'index.html', {'data': data})
-    return JsonResponse(data,safe=False)
 
 @csrf_exempt
 def post(request, *args, **kwargs):
@@ -36,7 +36,7 @@ def post(request, *args, **kwargs):
             _7d_perc=data["quote"]["USD"]["percent_change_7d"],
             market_cap=data["quote"]["USD"]["market_cap"],
             volume_24h=data["quote"]["USD"]["volume_24h"],
-            circulating_supply=data["quote"]["USD"]["price"],
+            circulating_supply=data["circulating_supply"],
             )
         obj.save()
     return JsonResponse({"response":"data successfuluyy updated in database"})
