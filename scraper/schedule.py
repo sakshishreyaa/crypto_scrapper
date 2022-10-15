@@ -18,6 +18,6 @@ def job():
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(job, 'interval', minutes=5)
+    scheduler.add_job(job, 'interval', seconds=5)
     scheduler.start()
     
