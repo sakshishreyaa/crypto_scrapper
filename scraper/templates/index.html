@@ -1,0 +1,32 @@
+<html>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {background-color: coral;}
+        </style>
+<table>
+    <tr><td>name</td><td>price</td><td>1h%</td><td >24h%</td><td>7d%</td><td>Market Cap</td><td>Volume(24h)</td><td>Circulating supply</td></tr>
+{%for row in data%}
+    <tr>
+         <td>{{ row.name }}</td>
+         <td>{{ row.price }}</td>
+         <td>{{ row.1h_perc }}</td>
+         <td>{{ row.24h_perc }}</td>  
+         <td>{{ row.7d_perc }}</td>
+         <td>{{ row.market_cap }}</td>
+         <td>{{ row.volume_24h }}</td>
+         <td>{{ row.circulating_supply }}</td>
+
+    </tr>
+{% endfor %}
+</table>
+</html>

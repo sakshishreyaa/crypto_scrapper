@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import HttpResponse
+from django.shortcuts import render
 from django.http import JsonResponse
 
 from django.views import View
@@ -14,7 +14,8 @@ def get(request, *args, **kwargs):
     resp = CoinMarketCap.objects.filter(latest=True).all()
     data=[]
     for i in resp:
-        data.append({'name':i.name,'price':i.price,'_1h_perc':i._1h_perc,'_24h_perc':i._24h_perc,'_7d_perc':i._7d_perc,'market_cap':i.market_cap,'volume_24h':i.volume_24h,'circulating_supply':i.circulating_supply})
+        data.append({'name':i.name,'price':i.price,'1h_perc':i._1h_perc,'24h_perc':i._24h_perc,'7d_perc':i._7d_perc,'market_cap':i.market_cap,'volume_24h':i.volume_24h,'circulating_supply':i.circulating_supply})
+    return render(request,'index.html', {'data': data})
     return JsonResponse(data,safe=False)
 
 @csrf_exempt
