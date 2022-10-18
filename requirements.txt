@@ -8,7 +8,10 @@ Brotli==1.0.9
 bs4==0.0.1
 certifi==2021.10.8
 chardet==4.0.0
+colorama==0.4.5
 configobj==5.0.6
+configparser==4.0.2
+crayons==0.4.0
 cryptography==2.1.4
 Django==1.11.29
 django-background-task==0.1.8
@@ -34,7 +37,9 @@ pyxdg==0.25
 requests==2.27.1
 schedule==0.6.0
 SecretStorage==2.3.1
+selenium==3.141.0
 six==1.16.0
 soupsieve==1.9.6
 tzlocal==2.1
 urllib3==1.26.12
+webdriver-manager==2.4.0
