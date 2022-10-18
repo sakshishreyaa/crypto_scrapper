@@ -15,7 +15,7 @@ def get(request, *args, **kwargs):
     client= get_redis_client()
     resp = json.loads(client.get("data"))
     for i in resp:
-        data.append({'name':i["name"],'price':i["quote"]["USD"]["price"],'1h_perc':i["quote"]["USD"]["percent_change_1h"],'24h_perc':i["quote"]["USD"]["percent_change_24h"],'7d_perc':i["quote"]["USD"]["percent_change_7d"],'market_cap':i["quote"]["USD"]["market_cap"],'volume_24h':i["quote"]["USD"]["volume_24h"],'circulating_supply':i["circulating_supply"]})
+        data.append({'name':i["name"],'price':i["price"],'1h_perc':i["_1h_perc"],'24h_perc':i["_24h_perc"],'7d_perc':i["_7d_perc"],'market_cap':i["market_cap"],'volume_24h':i["volume_24h"],'circulating_supply':i["circulating_supply"]})
     return render(request,'index.html', {'data': data})
 
 @csrf_exempt
@@ -30,12 +30,12 @@ def post(request, *args, **kwargs):
         obj = CoinMarketCap.objects.create(
             latest=True,
             name=data["name"],
-            price=data["quote"]["USD"]["price"],
-            _1h_perc=data["quote"]["USD"]["percent_change_1h"],
-            _24h_perc=data["quote"]["USD"]["percent_change_24h"],
-            _7d_perc=data["quote"]["USD"]["percent_change_7d"],
-            market_cap=data["quote"]["USD"]["market_cap"],
-            volume_24h=data["quote"]["USD"]["volume_24h"],
+            price=data["price"],
+            _1h_perc=data["_1h_perc"],
+            _24h_perc=data["_24h_perc"],
+            _7d_perc=data["_7d_perc"],
+            market_cap=["market_cap"],
+            volume_24h=["volume_24h"],
             circulating_supply=data["circulating_supply"],
             )
         obj.save()

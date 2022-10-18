@@ -29,4 +29,10 @@
     </tr>
 {% endfor %}
 </table>
+<script>
+  function autoRefresh() {
+      window.location = window.location.href;
+  }
+  setInterval('autoRefresh()', 3000);
+</script>
 </html>
